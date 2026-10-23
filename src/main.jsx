@@ -103,9 +103,9 @@ function App() {
               <span className="welcome-line" /> Your operations, simplified
             </div>
             <h1 id="page-title">
-              A little clarity.
+              Better Clarity...!!!
               <br />
-              <span>A lot more control.</span>
+              <span>Greater Control..!!</span>
             </h1>
             <p>
               All your security and network tools,
