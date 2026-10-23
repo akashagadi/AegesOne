@@ -1,4 +1,4 @@
-# AegesOne
+# AegisOne
 
 A responsive React SOC / NOC dashboard with a clean light theme, muted blue and pastel accents, spacious module cards, and subtle hover effects.
 

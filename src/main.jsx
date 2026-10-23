@@ -1,4 +1,4 @@
-﻿import React, { useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { createRoot } from "react-dom/client";
 import "../styles.css";
 import "./clean.css";
@@ -75,7 +75,7 @@ function App() {
   return (
     <>
       <header className="topbar">
-        <a className="brand" href="/" aria-label="AegesOne home">
+        <a className="brand" href="/" aria-label="AegisOne home">
           <img
             className="brand-logo"
             src="/assets/aegisone-logo.jpg"
@@ -84,14 +84,14 @@ function App() {
             height="711"
           />
           <span className="brand-name">
-            Aeges<span>One</span>
+            Aegis<span>One</span>
             <span className="brand-caption">SECURITY & NETWORK OPERATIONS</span>
           </span>
         </a>
         <div className="header-right">
           <span className="workspace-label">Your workspace</span>
           <span className="header-divider" />
-          <span className="avatar" aria-label="AegesOne workspace">
+          <span className="avatar" aria-label="AegisOne workspace">
             AO
           </span>
         </div>
@@ -228,7 +228,7 @@ function App() {
         </section>
         <footer>
           <span className="footer-brand">
-            <Icon name="shield" /> AegesOne{" "}
+            <Icon name="shield" /> AegisOne{" "}
             <span className="footer-divider">/</span>
             <span>Built for clarity. Designed for control.</span>
           </span>
@@ -265,7 +265,7 @@ function App() {
         <div className="dialog-icon">
           <Icon name={selected.icon} />
         </div>
-        <span className="dialog-eyebrow">AEGESONE MODULE</span>
+        <span className="dialog-eyebrow">AEGISONE MODULE</span>
         <h2 id="dialog-title">{selected.name}</h2>
         <p id="dialog-description">{selected.description}</p>
         <div className="coming-soon">
