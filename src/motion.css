@@ -1,0 +1,308 @@
+/* A soft surface with quiet motion; the layout stays stable during interaction. */
+.module-card {
+  --card-accent: #6d8fbd;
+  border-radius: 22px;
+  background: linear-gradient(145deg, #f3f6fa 0%, #e7edf5 100%);
+  border: 1px solid #d2dce9;
+  box-shadow:
+    inset 0 1px 0 #ffffffd9,
+    0 3px 5px #273d5b03,
+    0 10px 24px #273d5b04;
+  transition:
+    transform 0.28s cubic-bezier(0.2, 0.7, 0.3, 1),
+    box-shadow 0.28s,
+    border-color 0.28s;
+  animation: panel-arrive 0.6s cubic-bezier(0.2, 0.7, 0.3, 1) both;
+  animation-delay: var(--entrance-delay, 0ms);
+}
+.module-card.cyan {
+  --card-accent: #6f9f98;
+}
+.module-card.violet {
+  --card-accent: #9585b2;
+}
+.module-card::before {
+  left: 28px;
+  right: 28px;
+  background: var(--card-accent);
+  height: 3px;
+}
+.module-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(ellipse at 0% 0%, #ffffff80, transparent 65%);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+.module-card:hover,
+.module-card:focus-visible {
+  transform: translateY(-4px);
+  border-color: #b6c8df;
+  box-shadow:
+    inset 0 1px 0 #fff,
+    0 5px 10px #273d5b04,
+    0 16px 30px #273d5b12;
+}
+.module-card:hover::after {
+  opacity: 1;
+}
+.card-content,
+.network-art {
+  z-index: 1;
+}
+.card-content {
+  position: relative;
+}
+.module-icon {
+  border: 1px solid #96b3d52e;
+  box-shadow:
+    inset 0 1px 0 #ffffff90,
+    0 3px 7px #3c567008;
+  border-radius: 17px;
+  transition:
+    transform 0.3s cubic-bezier(0.2, 0.7, 0.3, 1),
+    box-shadow 0.3s;
+}
+.module-icon svg {
+  transition: transform 0.3s;
+}
+.module-card:hover .module-icon,
+.module-card:focus-visible .module-icon {
+  transform: translateY(-3px) rotate(-3deg);
+  box-shadow:
+    inset 0 1px 0 #ffffff90,
+    0 7px 12px #3c567012;
+}
+.module-card:hover .module-icon svg {
+  transform: rotate(3deg);
+}
+.card-bottom {
+  border-top-color: #ced9e780;
+}
+.card-bottom > svg {
+  width: 26px;
+  height: 26px;
+  padding: 5px;
+  border-radius: 50%;
+  background: #dbe4f080;
+  transition:
+    background 0.25s,
+    transform 0.25s,
+    color 0.25s;
+}
+.module-card:hover .card-bottom > svg {
+  background: #ccdbee;
+  color: #547bae;
+  transform: translateX(3px);
+}
+.featured-card {
+  background: linear-gradient(115deg, #d8e5f5, #e8eff8);
+  border-color: #c4d4e9;
+}
+.network-hub {
+  animation: hub-float 5s ease-in-out infinite;
+}
+.featured-card:hover .network-lines path {
+  animation: network-flow 2s linear infinite;
+}
+.network-node {
+  transition:
+    background 0.3s,
+    box-shadow 0.3s;
+}
+.featured-card:hover .network-node {
+  background: #f5f8fe;
+  box-shadow: 0 5px 15px #466f9e12;
+}
+dialog[open] {
+  animation: dialog-arrive 0.22s ease-out;
+}
+@keyframes panel-arrive {
+  from {
+    opacity: 0;
+    translate: 0 14px;
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+@keyframes hub-float {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-5deg);
+  }
+  50% {
+    transform: translateY(-4px) rotate(-3deg);
+  }
+}
+@keyframes network-flow {
+  to {
+    stroke-dashoffset: -18;
+  }
+}
+@keyframes dialog-arrive {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+@media (hover: none) {
+  .module-card:hover {
+    transform: none;
+  }
+  .module-card:hover .module-icon {
+    transform: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+  .module-card:hover,
+  .module-card:focus-visible,
+  .module-card:hover .module-icon,
+  .module-card:focus-visible .module-icon,
+  .module-card:hover .module-icon svg,
+  .module-card:hover .card-bottom > svg {
+    transform: none;
+  }
+}
+/* Two equally prominent operation centers, followed by six supporting modules. */
+.module-grid {
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+}
+.module-card {
+  grid-column: span 2;
+}
+.featured-card {
+  grid-column: span 3;
+  grid-template-columns: minmax(0, 1fr) 160px;
+  gap: 16px;
+  min-height: 250px;
+  padding: 28px;
+}
+.featured-card .network-art {
+  width: 160px;
+  height: 180px;
+  opacity: 0.9;
+}
+.featured-card .network-lines {
+  width: 260px;
+  left: -50px;
+}
+.featured-card .network-hub {
+  left: 49px;
+}
+.featured-card .node-a,
+.featured-card .node-c {
+  left: 0;
+}
+.featured-card .node-b,
+.featured-card .node-d {
+  right: 0;
+}
+.featured-card .featured-label {
+  font-size: 8px;
+}
+.featured-card.cyan {
+  background: linear-gradient(115deg, #dcece9, #eaf2f3);
+  border-color: #c4dcd7;
+}
+.featured-card.cyan .module-icon,
+.featured-card.cyan .network-hub {
+  background: #cee3de;
+  color: #67968d;
+  border-color: #bcd6d0;
+}
+.featured-card.cyan .network-node {
+  background: #ecf5f2;
+  color: #7aa69e;
+  border-color: #c4ddd6;
+}
+.featured-card.cyan .network-lines {
+  stroke: #bad5cf;
+}
+.featured-card.cyan h3 {
+  color: #3e6861;
+}
+@media (max-width: 1000px) {
+  .featured-card {
+    padding: 24px;
+    grid-template-columns: minmax(0, 1fr) 110px;
+    gap: 10px;
+  }
+  .featured-card .network-art {
+    width: 110px;
+    height: 130px;
+  }
+  .featured-card .network-lines {
+    display: none;
+  }
+  .featured-card .network-hub {
+    left: 24px;
+    top: 34px;
+  }
+  .featured-card .network-node {
+    width: 27px;
+    height: 27px;
+    border-radius: 9px;
+  }
+  .featured-card .network-node svg {
+    width: 16px;
+    height: 16px;
+  }
+  .featured-card .node-a,
+  .featured-card .node-b {
+    top: 0;
+  }
+  .featured-card .node-c,
+  .featured-card .node-d {
+    bottom: 0;
+  }
+  .featured-card .featured-label {
+    display: none;
+  }
+}
+@media (max-width: 760px) {
+  .module-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .module-card,
+  .module-card:last-child {
+    grid-column: span 1;
+  }
+  .featured-card {
+    grid-column: span 2;
+  }
+  .featured-card .featured-label {
+    display: block;
+  }
+  .featured-card .network-art {
+    justify-self: end;
+  }
+  .featured-card {
+    grid-template-columns: minmax(0, 1fr) 140px;
+  }
+  .module-card:last-child {
+    min-height: 205px;
+  }
+}
+@media (max-width: 420px) {
+  .featured-card {
+    grid-template-columns: minmax(0, 1fr) 110px;
+  }
+  .featured-card .featured-label {
+    display: none;
+  }
+}
